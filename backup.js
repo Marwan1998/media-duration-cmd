@@ -8,17 +8,17 @@ import figlet from 'figlet';
 import { createSpinner } from "nanospinner";
 
 
-const sleep = (ms = 2000) => new Promise(r => setTimeout(r, ms));
+const sleep = (ms = 200) => new Promise((r) => setTimeout(r, ms));
 async function welcome(){
-    const rainbowAnimation = chalkanimation.rainbow('Hello, welcome to media duration package \npowerd by Marwan Algadi');
+    const rainbowAnimation = chalkanimation.rainbow('Hello fucking hard world! \n');
     await sleep();
     rainbowAnimation.stop();
-    console.log(`${chalk.bgGray("\nProvide a correct path to calculate the video or audio files' time\n")}`);
+    console.log(`${chalk.bgGray("Put any colored text here")}`);
 }
-await welcome();
-
+// await welcome();
 
 let path = '';
+
 async function getPath(){
     const input = await inquirer.prompt({
         name: 'path',
@@ -28,26 +28,22 @@ async function getPath(){
             return 'C:\\';
         },
     });
+    handlePath(input.path != 'C:\\');
+    return input.path;
+}
 
+
+async function handlePath(isPath){
     const spinner = createSpinner('calculating...').start();
-    await sleep();
-    if(input.path != 'C:\\'){
+    await sleep(2000);
+    if(isPath)
         spinner.success({text: 'correct path'});
-        return input.path;
-    }else{
-        spinner.error({text: `wrong path provided, ${chalk.bgRed('exiting...')}`});
+    else{
+        spinner.error({text: 'wrong path provided, exiting...'});
         process.exit(1);
     }
 }
 
-path = await getPath();
-console.log(path);
+// path = await getPath();
 
-
-
-// the rest of program
-console.log("HERE");
-
-
-
-
+console.log(await getPath());
