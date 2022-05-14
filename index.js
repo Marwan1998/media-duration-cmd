@@ -10,61 +10,28 @@ import fs from 'fs';
 import {getVideoDurationInSeconds} from 'get-video-duration';
 
 
-
-
 let path = '';
 const sleep = (ms = 2000) => new Promise(r => setTimeout(r, ms));
+const myBrand = '\nMG45', line = '\n' + '-'.repeat(65);
 
-const myBrand = 'MG45'
-console.log(figlet.textSync(myBrand, {
-    font: 'Big Money-se',
-    horizontalLayout: 'fitted',
-    verticalLayout: 'ontrolled smushing',
-    width: 80,
-    whitespaceBreak: true
-}));
+console.clear();
 
-
-async function welcome(){
-    const rainbowAnimation = chalkanimation.rainbow('Hello, welcome to media duration package \n \tpowerd by Marwan Algadi');
-    await sleep();
-    rainbowAnimation.stop();
-    console.log(`${chalk.bgGray("\nProvide a correct path to calculate the video or audio files' time \n")}`);
-}
-async function by(){
-  const rainbowAnimation = chalkanimation.rainbow('This package powerd by Marwan Algadi');
-  await sleep();
-  rainbowAnimation.stop();
-  console.log(chalk.bgRed(myBrand));
-}
+console.log(gradient.pastel(figlet.textSync(myBrand, {
+  font: 'Big Money-se',
+  horizontalLayout: 'fitted',
+  verticalLayout: 'ontrolled smushing',
+  width: 80,
+  whitespaceBreak: true
+})));
+//Other two colors for myBrand, to use, put figlet.textSync({}) in the data param in gradinet
+// console.log(gradient.rainbow(data));
+// console.log(gradient('red', 'green')(data, {interpolation: 'hsv', hsvSpin: 'long'}));
 
 await welcome();
-
-async function getPath(){
-    const input = await inquirer.prompt({
-        name: 'path',
-        type: 'input',
-        message: 'Enter the path of files:',
-        default(){
-            return 'C:\\';
-        },
-    });
-
-    const spinner = createSpinner('calculating...').start();
-    await sleep(1000);
-    if(input.path != 'C:\\'){
-        spinner.success({text: 'correct path'});
-        return input.path;
-    }else{
-        spinner.error({text: `please provide a valid path, ${chalk.bgRed('exiting...')}`});
-        process.exit(1);
-    }
-}
 
 path = await getPath();
 
 const pathName = path + "\\"
-const line = "\n-----------------------------------------------------------------";
 
 //files calculation 
 const readDirPromise = new Promise((resolve, reject) => {
@@ -97,14 +64,17 @@ readDirPromise.then(durSum => {
     minutes: getMinutes(durSum).min + 'm',
     hours: getMinutes(durSum).hour + 'h',
   }
-  console.log(chalk.yellow(line));
+  console.log(gradient.pastel(line));
   console.table(time);
-  console.log(chalk.yellow(line));
-  by();
+  console.log(gradient.pastel(line));
+  by(); //fun call
 }).catch(err => {
   console.log(err, chalk.green(line));
   process.exit(1);
 });
+
+
+//--------------------All Function--------------------
 
 function getMinutes(num) {
   return {
@@ -113,3 +83,40 @@ function getMinutes(num) {
     hour: Math.round((num / (60 * 60)) * 100) / 100,
   };
 }
+
+async function welcome(){
+  const rainbowAnimation = chalkanimation.rainbow('Hello, welcome to media duration package \n \tpowerd by Marwan Algadi');
+  await sleep();
+  rainbowAnimation.stop();
+  console.log(`${chalk.bgGray("\nProvide a correct path to calculate the video or audio files' time \n")}`);
+}
+
+async function by(){
+const rainbowAnimation = chalkanimation.rainbow('This package powerd by Marwan Algadi');
+await sleep(3000);
+rainbowAnimation.stop();
+console.log(chalk.bgRed(myBrand));
+// console.log(gradient.rainbow(myBrand));
+}
+
+async function getPath(){
+  const input = await inquirer.prompt({
+      name: 'path',
+      type: 'input',
+      message: 'Enter the path of files:',
+      default(){
+          return 'C:\\';
+      },
+  });
+
+  const spinner = createSpinner('calculating...').start();
+  await sleep(1000);
+  if(input.path != 'C:\\'){
+      spinner.success({text: 'correct path'});
+      return input.path;
+  }else{
+      spinner.error({text: `please provide a valid path, ${chalk.bgRed('exiting...')}`});
+      process.exit(1);
+  }
+}
+
