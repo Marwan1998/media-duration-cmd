@@ -1,7 +1,7 @@
 {
-  "name": "duration",
+  "name": "duration-mg",
   "version": "1.0.0",
-  "description": "Media Duration Command Line Tool",
+  "description": "Media Duration Command Line Tool, by MG45",
   "homepage": "https://github.com/Marwan1998/media-duration-cmd#readme",
   "main": "index.js",
   "type": "module",
