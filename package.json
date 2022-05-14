@@ -18,6 +18,7 @@
     "url": "https://github.com/Marwan1998/media-duration-cmd/issues"
   },
   "homepage": "https://github.com/Marwan1998/media-duration-cmd#readme",
+  "bin": "./index.js",
   "dependencies": {
     "chalk": "^4.0.0",
     "chalk-animation": "^2.0.2",
