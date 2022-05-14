@@ -1,23 +1,19 @@
 {
-  "name": "media-duration-package",
+  "name": "duration",
   "version": "1.0.0",
   "description": "Media Duration Command Line Tool",
-  "main": "app.js",
+  "homepage": "https://github.com/Marwan1998/media-duration-cmd#readme",
+  "main": "index.js",
   "type": "module",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Marwan1998/media-duration-cmd.git"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Marwan Algadi, MG45",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Marwan1998/media-duration-cmd/issues"
   },
-  "homepage": "https://github.com/Marwan1998/media-duration-cmd#readme",
   "bin": "./index.js",
   "dependencies": {
     "chalk": "^4.0.0",
